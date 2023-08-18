@@ -2,7 +2,10 @@
     <div class="todo-form flex w-full h-[65px] p-[16px] pl-0">
         <button
             class="todo-form-button invisible h-full bg-transparent text-[#e6e6e6] text-[22px] leading-[45px]"
-            :class="[{ show: todo.length }, { active: isAllCompleted }]"
+            :class="[
+                { show: todoStore.todo.length },
+                { active: isAllCompleted },
+            ]"
             @click="handleToggleAllComplete"
         >
             ❯
@@ -18,13 +21,13 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { storeToRefs } from "pinia";
 import { useTodo } from "@stores";
 
 const todoStore = useTodo();
-const { todo } = storeToRefs(todoStore);
 const isAllCompleted = computed<boolean>(() =>
-    todo.value.length ? todo.value.every((item) => item.completed) : false,
+    todoStore.todo.length
+        ? todoStore.todo.every((item) => item.completed)
+        : false,
 );
 
 function handleToggleAllComplete() {

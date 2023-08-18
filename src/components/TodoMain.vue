@@ -1,16 +1,14 @@
 <template>
     <main class="max-w-[550px] min-w-[230px] w-full bg-white text-[#4d4d4d]">
         <TodoForm />
-        <TodoContainer v-if="todo.length" />
+        <TodoContainer v-if="todoStore.todo.length" />
     </main>
 </template>
 
 <script setup lang="ts">
 import { useTodo } from "@stores";
-import { storeToRefs } from "pinia";
 
 const todoStore = useTodo();
-const { todo } = storeToRefs(todoStore);
 </script>
 
 <style lang="scss">
