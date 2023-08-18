@@ -6,7 +6,9 @@ type State = {
     active: number;
 };
 
-type Getter = {};
+type Getter = {
+    getActiveFilter: (state: State) => string;
+};
 
 type Action = {
     // addTodo: (text: string) => void;
@@ -19,6 +21,8 @@ export default defineStore<"filter", State, Getter, Action>("filter", {
         list: ["all", "active", "completed"],
         active: 0,
     }),
-    getters: {},
+    getters: {
+        getActiveFilter: (state) => state.list[state.active],
+    },
     actions: {},
 });

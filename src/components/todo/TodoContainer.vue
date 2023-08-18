@@ -1,5 +1,6 @@
 <template>
     <section>
+        <TodoList />
         <TodoNavigation />
     </section>
 </template>
