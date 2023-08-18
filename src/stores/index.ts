@@ -1,4 +1,4 @@
-import { useTodo, Todo } from "./todo";
+import { useTodo, Todo, UseTodoType } from "./todo";
 
 export { useTodo };
-export type { Todo };
+export type { Todo, UseTodoType };

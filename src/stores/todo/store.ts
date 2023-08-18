@@ -6,19 +6,32 @@ type State = {
     id: number;
 };
 
-export default defineStore("stores/todo", {
-    state: (): State => ({
+type Getter = {};
+
+type Action = {
+    addTodo: (text: string) => void;
+    toggleAllComplete: (completed: boolean) => void;
+};
+
+export default defineStore<"todo", State, Getter, Action>("todo", {
+    state: () => ({
         todo: [],
         id: 0,
     }),
     getters: {},
     actions: {
-        addTodo(text: string, completed: boolean) {
+        addTodo(text: string) {
             this.$state.todo.push({
                 id: this.$state.id++,
                 text,
-                completed,
+                completed: false,
             });
+        },
+        toggleAllComplete(completed: boolean) {
+            this.$state.todo = this.$state.todo.map((item) => ({
+                ...item,
+                completed,
+            }));
         },
     },
 });
