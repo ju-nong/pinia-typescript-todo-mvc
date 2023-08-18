@@ -1,5 +1,7 @@
 <template>
-    <section>컨테이너</section>
+    <section>
+        <TodoNavigation />
+    </section>
 </template>
 
 <script setup lang="ts"></script>

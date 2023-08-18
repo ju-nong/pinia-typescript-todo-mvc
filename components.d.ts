@@ -12,5 +12,6 @@ declare module 'vue' {
     TodoForm: typeof import('./src/components/todo/TodoForm.vue')['default']
     TodoHeader: typeof import('./src/components/TodoHeader.vue')['default']
     TodoMain: typeof import('./src/components/TodoMain.vue')['default']
+    TodoNavigation: typeof import('./src/components/todo/TodoNavigation.vue')['default']
   }
 }

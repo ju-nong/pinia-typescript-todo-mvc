@@ -1,4 +1,5 @@
-import { useTodo, Todo, UseTodoType } from "./todo";
+import { useTodo, Todo } from "./todo";
+import { useFilter, Filter } from "./filter";
 
-export { useTodo };
-export type { Todo, UseTodoType };
+export { useTodo, useFilter };
+export type { Todo, Filter };

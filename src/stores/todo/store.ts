@@ -11,6 +11,7 @@ type Getter = {};
 type Action = {
     addTodo: (text: string) => void;
     toggleAllComplete: (completed: boolean) => void;
+    clearTodo: () => void;
 };
 
 export default defineStore<"todo", State, Getter, Action>("todo", {
@@ -32,6 +33,11 @@ export default defineStore<"todo", State, Getter, Action>("todo", {
                 ...item,
                 completed,
             }));
+        },
+        clearTodo() {
+            this.$state.todo = this.$state.todo.filter(
+                (item) => !item.completed,
+            );
         },
     },
 });
