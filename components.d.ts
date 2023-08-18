@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    TodoContainer: typeof import('./src/components/todo/TodoContainer.vue')['default']
     TodoFooter: typeof import('./src/components/TodoFooter.vue')['default']
     TodoForm: typeof import('./src/components/todo/TodoForm.vue')['default']
     TodoHeader: typeof import('./src/components/TodoHeader.vue')['default']
