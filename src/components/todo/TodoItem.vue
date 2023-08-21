@@ -1,10 +1,77 @@
 <template>
-    <li class="todo-item">dd</li>
+    <li class="todo-item">
+        <button
+            class="todo-item-complte-button"
+            :class="isCompleted"
+            @click="todoStore.toggleComplete(todo.id)"
+        ></button>
+        <input
+            v-if="config.isEdit"
+            type="text"
+            ref="$input"
+            :value="config.text"
+            @input="handleChangeText"
+        />
+        <div v-else @dblclick="handleDoubleClick">{{ todo.text }}</div>
+        <button
+            class="todo-item-destroy-button"
+            :class="isCompleted"
+            @click="todoStore.destroyTodo(todo.id)"
+        >
+            ×
+        </button>
+    </li>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { PropType, computed, ref, reactive, nextTick } from "vue";
+import { onClickOutside } from "@vueuse/core";
+import { useTodo, Todo } from "@stores";
 
-<style>
+const { todo } = defineProps({
+    todo: {
+        type: Object as PropType<Todo>,
+        required: true,
+    },
+});
+
+const todoStore = useTodo();
+
+const $input = ref();
+const config = reactive({
+    isEdit: false,
+    text: todo.text,
+});
+
+const isCompleted = computed(() =>
+    config.isEdit ? "_hidden" : todo.completed ? "completed" : "",
+);
+
+async function handleDoubleClick() {
+    config.isEdit = true;
+
+    await nextTick(); // 데이터 변경 이후 DOM 업데이트를 마쳤을 때
+
+    // 이후 코드 실행
+    $input.value?.focus();
+
+    onClickOutside($input, () => {
+        config.isEdit = false;
+        todoStore.changeText(todo.id, config.text);
+    });
+}
+
+function handleChangeText(event: Event) {
+    let { value } = event.target as HTMLInputElement;
+    value = value.trim();
+
+    if (value.length) {
+        config.text = value;
+    }
+}
+</script>
+
+<style lang="scss">
 .todo-item {
     position: relative;
     font-size: 24px;
@@ -33,7 +100,7 @@
         line-height: 40px;
         font-size: 22px;
 
-        &.hidden {
+        &._hidden {
             visibility: hidden;
         }
 
@@ -82,7 +149,7 @@
             color: #af5b5e;
         }
 
-        &.hidden {
+        &._hidden {
             visibility: hidden !important;
         }
     }

@@ -1,10 +1,6 @@
 <template>
     <ul class="flex flex-col list-none w-full">
-        <TodoItem
-            v-for="(item, index) in todoFiltered"
-            :key="index"
-            :todo="item"
-        />
+        <TodoItem v-for="todo in todoFiltered" :key="todo" :todo="todo" />
     </ul>
 </template>
 
