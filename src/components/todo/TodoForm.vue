@@ -64,6 +64,7 @@ function handleKeyDown(event: KeyboardEvent) {
     }
 
     &-input {
+        width: calc(100% - 45px);
         &::placeholder {
             color: #e6e6e6;
             font-style: italic;
